@@ -18,28 +18,42 @@ bool Multithreads::Is_hash_needable(const std::string& hash) {
   return true;
 }
 
-void Multithreads::Do_counting() { /*
+void Multithreads::init_log() {
+  logging::add_file_log("sample.log");
+  logging::core::get()->set_filter
+    (
+        logging::trivial::severity >= logging::trivial::info
+    );
+} 
+
+void Multithreads::Do_counting() { 
+  init_();
+    logging::add_common_attributes();
+
+    using namespace logging::trivial;
+    src::severity_logger< severity_level > lg;
+/*
   for (unsigned int i = 0; i < 5000; i++) {
     std::vector<unsigned char> char_vector_random = Fill_vector_by_random();
     const std::string hash = picosha2::hash256_hex_string(char_vector_random);
     my_mutex.lock();
     //boost::log::add_file_log("sample.log");
     //BOOST_LOG_TRIVIAL(trace)
-        << "ID ïîòîêà: " << std::this_thread::get_id() << std::endl;
-    BOOST_LOG_TRIVIAL(trace) << "Ïðîîáðàç: ";
+        << "ID Ã¯Ã®Ã²Ã®ÃªÃ : " << std::this_thread::get_id() << std::endl;
+    BOOST_LOG_TRIVIAL(trace) << "ÃÃ°Ã®Ã®Ã¡Ã°Ã Ã§: ";
     for (unsigned z = 0; z < char_vector_random.size(); z++) {
       BOOST_LOG_TRIVIAL(trace) << char_vector_random[z];
     }
     BOOST_LOG_TRIVIAL(trace) << std::endl;
-    BOOST_LOG_TRIVIAL(trace) << "HASH- çíà÷åíèå: " << hash;
+    BOOST_LOG_TRIVIAL(trace) << "HASH- Ã§Ã­Ã Ã·Ã¥Ã­Ã¨Ã¥: " << hash;
     BOOST_LOG_TRIVIAL(trace) << std::endl << std::endl;
     if (Is_hash_needable(hash)) {
-      BOOST_LOG_TRIVIAL(info) << "Ïðîîáðàç: ";
+      BOOST_LOG_TRIVIAL(info) << "ÃÃ°Ã®Ã®Ã¡Ã°Ã Ã§: ";
       for (unsigned z = 0; z < char_vector_random.size(); z++) {
         BOOST_LOG_TRIVIAL(info) << char_vector_random[z];
       }
       BOOST_LOG_TRIVIAL(info) << std::endl;
-      BOOST_LOG_TRIVIAL(info) << "HASH- çíà÷åíèå: " << hash;
+      BOOST_LOG_TRIVIAL(info) << "HASH- Ã§Ã­Ã Ã·Ã¥Ã­Ã¨Ã¥: " << hash;
       BOOST_LOG_TRIVIAL(info) << std::endl << std::endl;
     }
     my_mutex.unlock();
