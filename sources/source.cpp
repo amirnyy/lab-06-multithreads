@@ -53,7 +53,10 @@ void Multithreads::Do_counting(src::severity_logger< severity_level > lg) {
   
 }
 
-void Multithreads::Make_counting_in_threads(unsigned threads_count, src::severity_logger< severity_level > lg) {
+void Multithreads::Make_counting_in_threads(unsigned threads_count) {
+  logging::add_file_log("home/travis/build/bmstu-iu8-34-cpp-2018/lab-06-multithreads-Avsyankaa/sample.log");
+  logging::add_common_attributes();
+  src::severity_logger< severity_level > lg;
   std::vector<std::thread> threads;
   for (unsigned i = 0; i < threads_count; i++) {
     threads.push_back(std::thread{&Multithreads::Do_counting, this, lg});
