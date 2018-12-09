@@ -9,11 +9,20 @@
 #include <iomanip>
 #include <iostream>
 #include <thread>
+#include <boost/log/core.hpp>
 #include <boost/log/trivial.hpp>
-#include <boost/log/utility/setup/console.hpp>
+#include <boost/log/expressions.hpp>
+#include <boost/log/sinks/text_file_backend.hpp>
 #include <boost/log/utility/setup/file.hpp>
 #include <boost/log/utility/setup/common_attributes.hpp>
+#include <boost/log/sources/severity_logger.hpp>
+#include <boost/log/sources/record_ostream.hpp>
 #include <mutex>
+
+namespace logging = boost::log;
+namespace src = boost::log::sources;
+namespace sinks = boost::log::sinks;
+namespace keywords = boost::log::keywords;
 
 class Multithreads {
  private:
@@ -21,6 +30,7 @@ class Multithreads {
   std::vector<unsigned char> Fill_vector_by_random();
   bool Is_hash_needable(const std::string& hash);
   void Do_counting();
+  void init_log(); 
 
  public:
 unsigned threads_number;
