@@ -31,7 +31,7 @@ class Multithreads {
   std::recursive_mutex m;
   std::vector<unsigned char> Fill_vector_by_random();
   bool Is_hash_needable(const std::string& hash);
-  void Do_counting(src::severity_logger< severity_level > lg);
+  void Do_counting();
 
  public:
 unsigned threads_number;
