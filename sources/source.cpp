@@ -27,7 +27,7 @@ void Multithreads::init_log() {
 } 
 
 void Multithreads::Do_counting() { 
-  init_();
+    init_log();
     logging::add_common_attributes();
 
     using namespace logging::trivial;
