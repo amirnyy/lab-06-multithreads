@@ -26,8 +26,8 @@ string(APPEND CMAKE_CXX_FLAGS " -DBOOST_LOG_DYN_LINK -lpthread")
 hunter_add_package(GTest)
 find_package(GTest CONFIG REQUIRED)
 
-hunter_add_package(Boost COMPONENTS system filesystem log thread) 
-find_package(Boost CONFIG REQUIRED system filesystem log thread)
+hunter_add_package(Boost COMPONENTS filesystem log thread system) 
+find_package(Boost CONFIG REQUIRED filesystem log thread system)
 
 add_library(multithreads STATIC
   ${CMAKE_CURRENT_SOURCE_DIR}/sources/source.cpp
@@ -46,8 +46,8 @@ target_include_directories(tests
   PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/third-party/PicoSHA2
 )
 
-target_link_libraries(tests PUBLIC GTest::main Boost::system Boost::filesystem Boost::log Boost::thread multithreads)
-target_link_libraries(multithreads Boost::system Boost::filesystem Boost::log Boost::thread)
+target_link_libraries(tests PUBLIC GTest::main Boost::filesystem Boost::log Boost::thread Boost::system multithreads)
+target_link_libraries(multithreads Boost::filesystem Boost::log Boost::thread Boost::system)
 
 enable_testing()
 add_test(NAME unit_tests COMMAND tests) 
