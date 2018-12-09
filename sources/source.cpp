@@ -18,13 +18,7 @@ bool Multithreads::Is_hash_needable(const std::string& hash) {
   return true;
 }
 
-void init() {
-  logging::add_file_log("home/travis/build/bmstu-iu8-34-cpp-2018/lab-06-multithreads-Avsyankaa/sample.log");
-  logging::core::get()->set_filter
-    (
-        logging::trivial::severity >= logging::trivial::info
-    );
-} 
+
 
 void Multithreads::Do_counting(src::severity_logger< severity_level > lg) { 
     std::lock_guard<std::recursive_mutex> lock(m);
