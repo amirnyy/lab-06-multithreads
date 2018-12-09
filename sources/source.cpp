@@ -26,12 +26,7 @@ void init() {
     );
 } 
 
-void Multithreads::Do_counting() { 
-    init();
-    logging::add_common_attributes();
-
-    ;
-    src::severity_logger< severity_level > lg;
+void Multithreads::Do_counting(src::severity_logger< severity_level > lg) { 
     std::lock_guard<std::recursive_mutex> lock(m);
     BOOST_LOG_SEV(lg, trace) << "puck" << std::endl;
 /*
@@ -66,8 +61,11 @@ void Multithreads::Do_counting() {
 
 void Multithreads::Make_counting_in_threads(unsigned threads_count) {
   std::vector<std::thread> threads;
+  init();
+  logging::add_common_attributes();
+  src::severity_logger< severity_level > lg;
   for (unsigned i = 0; i < threads_count; i++) {
-    threads.push_back(std::thread{&Multithreads::Do_counting, this});
+    threads.push_back(std::thread{&Multithreads::Do_counting, this, lg});
   }
   for (unsigned i = 0; i < threads.size(); i++) {
     threads[i].join();
