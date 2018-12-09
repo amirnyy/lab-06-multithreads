@@ -32,6 +32,8 @@ void Multithreads::Do_counting() {
 
     using namespace logging::trivial;
     src::severity_logger< severity_level > lg;
+    std::lock_guard<std::recursive_mutex> lock(m);
+    BOOST_LOG_SEV(lg, trace) << "puck" << std::endl;
 /*
   for (unsigned int i = 0; i < 5000; i++) {
     std::vector<unsigned char> char_vector_random = Fill_vector_by_random();
@@ -59,8 +61,7 @@ void Multithreads::Do_counting() {
     my_mutex.unlock();
     std::this_thread::sleep_for(std::chrono::nanoseconds(1));
   }*/
-  std::lock_guard<std::recursive_mutex> lock(m);
-  std::cout << "puck" << std::endl;
+  
 }
 
 void Multithreads::Make_counting_in_threads(unsigned threads_count) {
