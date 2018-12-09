@@ -38,7 +38,6 @@ add_executable(tests
 )
 
 target_compile_definitions(tests PRIVATE BOOST_LOG_DYN_LINK=true)
-target_compile_definitions(multithreads PRIVATE BOOST_LOG_DYN_LINK=true)
 
 target_include_directories(multithreads
   PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include
