@@ -7,6 +7,7 @@
 #include <cstdlib>
 #include <string>
 #include <iomanip>
+#include <ostream>
 #include <iostream>
 #include <thread>
 #include <boost/log/core.hpp>
