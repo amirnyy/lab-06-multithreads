@@ -24,14 +24,14 @@ namespace logging = boost::log;
 namespace src = boost::log::sources;
 namespace sinks = boost::log::sinks;
 namespace keywords = boost::log::keywords;
-using namespace logging::trivial
+using namespace logging::trivial;
 
 class Multithreads {
  private:
   std::recursive_mutex m;
   std::vector<unsigned char> Fill_vector_by_random();
   bool Is_hash_needable(const std::string& hash);
-  void Do_counting();
+  void Do_counting(src::severity_logger< severity_level > lg);
   void init_log(); 
 
  public:
