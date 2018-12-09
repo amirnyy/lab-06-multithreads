@@ -38,7 +38,7 @@ unsigned threads_number;
 Multithreads() { 
 	threads_number = std::thread::hardware_concurrency();
   }
-void Make_counting_in_threads(unsigned threads_count, src::severity_logger< severity_level > lg);
+void Make_counting_in_threads(unsigned threads_count);
 };
 
 
