@@ -14,7 +14,6 @@ jobs:
       script:
       - ./scripts/genenv.sh
       - docker run --env-file .env -v `pwd`:`pwd` -w `pwd` -t rusdevops/bootstrap:cpp scripts/tests.sh
-      - ./tests
 
 notifications:
     email: false
