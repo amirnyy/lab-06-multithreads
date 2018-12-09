@@ -10,7 +10,7 @@ cd gcc-7-cxx17-pic-Debug
 cd ..
 cd ..
 ls
-nl -ba sample.log
+grep -i trace sample.log
 gcovr -r  .
 
 REPORT_DATA=$(gcovr -r  . | base64 | tr -d '\n')
