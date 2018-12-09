@@ -26,8 +26,8 @@ string(APPEND CMAKE_CXX_FLAGS " -Wshadow -Wnon-virtual-dtor")
 hunter_add_package(GTest)
 find_package(GTest CONFIG REQUIRED)
 
-hunter_add_package(Boost COMPONENTS log) 
-find_package(Boost CONFIG REQUIRED log)
+hunter_add_package(Boost COMPONENTS system log) 
+find_package(Boost CONFIG REQUIRED system log)
 
 add_library(multithreads STATIC
   ${CMAKE_CURRENT_SOURCE_DIR}/sources/source.cpp
@@ -46,8 +46,8 @@ target_include_directories(tests
   PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/third-party/PicoSHA2
 )
 
-target_link_libraries(tests PUBLIC GTest::main Boost::log multithreads)
-target_link_libraries(multithreads Boost::log)
+target_link_libraries(tests PUBLIC GTest::main Boost::system Boost::log multithreads)
+target_link_libraries(multithreads Boost::system Boost::log)
 
 enable_testing()
 add_test(NAME unit_tests COMMAND tests) 
