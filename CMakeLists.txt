@@ -49,7 +49,7 @@ target_include_directories(tests
 )
 
 target_link_libraries(tests PUBLIC GTest::main Boost::log Boost::thread Boost::filesystem Boost::system multithreads)
-target_link_libraries(multithreads Boost::log Boost::thread Boost::filesystem Boost::system)
+target_link_libraries(multithreads PUBLIC Boost::log Boost::thread Boost::filesystem Boost::system)
 
 enable_testing()
 add_test(NAME unit_tests COMMAND tests) 
