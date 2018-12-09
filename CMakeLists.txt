@@ -23,7 +23,7 @@ string(APPEND CMAKE_CXX_FLAGS " -pedantic -Werror -Wall -Wextra")
 string(APPEND CMAKE_CXX_FLAGS " -Wno-unused-command-line-argument")
 string(APPEND CMAKE_CXX_FLAGS " -Wshadow -Wnon-virtual-dtor")
 string(APPEND CMAKE_CXX_FLAGS " -DBOOST_LOG_DYN_LINK -lpthread")
-add_definitions(-DBOOST_LOG_DYN_LINK)
+
 hunter_add_package(GTest)
 find_package(GTest CONFIG REQUIRED)
 
@@ -37,6 +37,8 @@ add_library(multithreads STATIC
 add_executable(tests
   ${CMAKE_CURRENT_SOURCE_DIR}/sources/main.cpp
 )
+
+target_compile_definitions(tests PRIVATE BOOST_LOG_DYN_LINK=true)
 
 target_include_directories(multithreads
   PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include
