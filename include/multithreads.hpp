@@ -2,6 +2,7 @@
 
 #ifndef INCLUDE_MULTITHREADS_HPP_
 #define INCLUDE_MULTITHREADS_HPP_
+#define BOOST_ALL_DYN_LINK
 
 #include <picosha2.h>
 #include <cstdlib>
