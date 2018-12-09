@@ -18,7 +18,7 @@ bool Multithreads::Is_hash_needable(const std::string& hash) {
   return true;
 }
 
-void Multithreads::init_log() {
+void init() {
   logging::add_file_log("home/travis/build/bmstu-iu8-34-cpp-2018/lab-06-multithreads-Avsyankaa/sample.log");
   logging::core::get()->set_filter
     (
@@ -27,7 +27,7 @@ void Multithreads::init_log() {
 } 
 
 void Multithreads::Do_counting() { 
-    init_log();
+    init();
     logging::add_common_attributes();
 
     using namespace logging::trivial;
