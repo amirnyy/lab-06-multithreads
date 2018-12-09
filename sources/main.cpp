@@ -3,5 +3,8 @@
 
 int main() {
 	Multithreads m;
-    m.Make_counting_in_threads(4);
+	init();
+  logging::add_common_attributes();
+  src::severity_logger< severity_level > lg;
+    m.Make_counting_in_threads(4, lg);
 }
