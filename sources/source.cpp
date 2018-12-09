@@ -30,7 +30,7 @@ void Multithreads::Do_counting() {
     init();
     logging::add_common_attributes();
 
-    using namespace logging::trivial;
+    ;
     src::severity_logger< severity_level > lg;
     std::lock_guard<std::recursive_mutex> lock(m);
     BOOST_LOG_SEV(lg, trace) << "puck" << std::endl;
