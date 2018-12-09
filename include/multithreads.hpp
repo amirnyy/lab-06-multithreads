@@ -32,7 +32,6 @@ class Multithreads {
   std::vector<unsigned char> Fill_vector_by_random();
   bool Is_hash_needable(const std::string& hash);
   void Do_counting(src::severity_logger< severity_level > lg);
-  void init_log(); 
 
  public:
 unsigned threads_number;
@@ -42,11 +41,5 @@ Multithreads() {
 void Make_counting_in_threads(unsigned threads_count, src::severity_logger< severity_level > lg);
 };
 
-void init() {
-  logging::add_file_log("home/travis/build/bmstu-iu8-34-cpp-2018/lab-06-multithreads-Avsyankaa/sample.log");
-  logging::core::get()->set_filter
-    (
-        logging::trivial::severity >= logging::trivial::info
-    );
-} 
+
 #endif  // INCLUDE_MULTITHREADS_HPP_
