@@ -6,8 +6,8 @@ export CTEST_OUTPUT_ON_FAILURE=true
 ./tools/polly/bin/polly --reconfig --toolchain gcc-7-cxx17-pic --target lcov --config-all Debug --fwd CMAKE_EXE_LINKER="-fuse-ld=gold" BUILD_COVERAGE=ON
 ls
 cd _builds
+cd gcc-7-cxx17-pic-Debug
 ls
-cd Debug
 ./tests
 gcovr -r  .
 
