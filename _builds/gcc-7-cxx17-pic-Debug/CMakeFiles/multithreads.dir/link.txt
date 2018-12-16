@@ -1,0 +1,2 @@
+/usr/bin/ar qc libmultithreadsd.a  CMakeFiles/multithreads.dir/sources/source.cpp.o CMakeFiles/multithreads.dir/sources/main.cpp.o
+/usr/bin/ranlib libmultithreadsd.a

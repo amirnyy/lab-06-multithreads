@@ -11,6 +11,10 @@ set(
   CACHE STRING "Default cache server"
 )
 
+set(
+BOOST_ALL_DYN_LINK OFF
+)
+
 include("tools/gate/cmake/HunterGate.cmake")
 
 huntergate(
@@ -36,8 +40,6 @@ add_library(multithreads STATIC
 add_executable(tests
   ${CMAKE_CURRENT_SOURCE_DIR}/sources/main.cpp
 )
-
-target_compile_definitions(tests PRIVATE BOOST_LOG_DYN_LINK=true)
 
 target_include_directories(multithreads
   PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include

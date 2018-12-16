@@ -1,0 +1,65 @@
+Execute command: [
+  `which`
+  `cmake`
+]
+[/home/vagrant/Projects/lab-06-multithreads-Avsyankaa]> "which" "cmake"
+/usr/local/bin/cmake
+Execute command: [
+  `cmake`
+  `--version`
+]
+[/home/vagrant/Projects/lab-06-multithreads-Avsyankaa]> "cmake" "--version"
+cmake version 3.13.2
+
+CMake suite maintained and supported by Kitware (kitware.com/cmake).
+Execute command: [
+  `cmake`
+  `-H.`
+  `-B/home/vagrant/Projects/lab-06-multithreads-Avsyankaa/_builds/gcc-7-cxx17-pic-Debug`
+  `-DCMAKE_BUILD_TYPE=Debug`
+  `-GUnix Makefiles`
+  `-DCMAKE_TOOLCHAIN_FILE=/home/vagrant/Projects/lab-06-multithreads-Avsyankaa/tools/polly/gcc-7-cxx17-pic.cmake`
+  `-DCMAKE_EXE_LINKER=-fuse-ld=gold`
+  `-DHUNTER_CONFIGURATION_TYPES=Debug`
+]
+[/home/vagrant/Projects/lab-06-multithreads-Avsyankaa]> "cmake" "-H." "-B/home/vagrant/Projects/lab-06-multithreads-Avsyankaa/_builds/gcc-7-cxx17-pic-Debug" "-DCMAKE_BUILD_TYPE=Debug" "-GUnix Makefiles" "-DCMAKE_TOOLCHAIN_FILE=/home/vagrant/Projects/lab-06-multithreads-Avsyankaa/tools/polly/gcc-7-cxx17-pic.cmake" "-DCMAKE_EXE_LINKER=-fuse-ld=gold" "-DHUNTER_CONFIGURATION_TYPES=Debug"
+-- [polly] Used toolchain: gcc 7 / c++17 support / PIC
+-- [hunter] Calculating Toolchain-SHA1
+-- [hunter] Calculating Config-SHA1
+-- [hunter] HUNTER_ROOT: /root/.hunter
+-- [hunter] [ Hunter-ID: 70287b1 | Toolchain-ID: fc9dcb2 | Config-ID: dffbc08 ]
+-- [hunter] GTEST_ROOT: /root/.hunter/_Base/70287b1/fc9dcb2/dffbc08/Install (ver.: 1.8.0-hunter-p11)
+-- [hunter] BOOST_ROOT: /root/.hunter/_Base/70287b1/fc9dcb2/dffbc08/Install (ver.: 1.68.0-p1)
+-- [hunter] BOOST_ROOT: /root/.hunter/_Base/70287b1/fc9dcb2/dffbc08/Install (ver.: 1.68.0-p1)
+-- [hunter] BOOST_ROOT: /root/.hunter/_Base/70287b1/fc9dcb2/dffbc08/Install (ver.: 1.68.0-p1)
+-- [hunter] BOOST_ROOT: /root/.hunter/_Base/70287b1/fc9dcb2/dffbc08/Install (ver.: 1.68.0-p1)
+-- [hunter] BOOST_ROOT: /root/.hunter/_Base/70287b1/fc9dcb2/dffbc08/Install (ver.: 1.68.0-p1)
+-- Boost version: 1.68.0
+-- Found the following Boost libraries:
+--   log
+--   thread
+--   filesystem
+--   system
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/vagrant/Projects/lab-06-multithreads-Avsyankaa/_builds/gcc-7-cxx17-pic-Debug
+Execute command: [
+  `cmake`
+  `--build`
+  `/home/vagrant/Projects/lab-06-multithreads-Avsyankaa/_builds/gcc-7-cxx17-pic-Debug`
+  `--config`
+  `Debug`
+  `--`
+]
+[/home/vagrant/Projects/lab-06-multithreads-Avsyankaa]> "cmake" "--build" "/home/vagrant/Projects/lab-06-multithreads-Avsyankaa/_builds/gcc-7-cxx17-pic-Debug" "--config" "Debug" "--"
+[ 60%] Built target multithreads
+[ 80%] Linking CXX executable tests
+libmultithreadsd.a(source.cpp.o): In function `boost::log::v2s_mt_posix::basic_formatter<char> boost::log::v2s_mt_posix::parse_formatter<char>(char const*)':
+/root/.hunter/_Base/70287b1/fc9dcb2/dffbc08/Install/include/boost/log/utility/setup/formatter_parser.hpp:207: undefined reference to `boost::log::v2s_mt_posix::basic_formatter<char> boost::log::v2s_mt_posix::parse_formatter<char>(char const*, char const*)'
+collect2: error: ld returned 1 exit status
+make[2]: *** [tests] Error 1
+CMakeFiles/tests.dir/build.make:94: recipe for target 'tests' failed
+CMakeFiles/Makefile2:109: recipe for target 'CMakeFiles/tests.dir/all' failed
+Makefile:94: recipe for target 'all' failed
+make[1]: *** [CMakeFiles/tests.dir/all] Error 2
+make: *** [all] Error 2
