@@ -40,13 +40,13 @@ void Multithreads::init()
 
 void Multithreads::Do_counting() {
     std::srand(std::time(0));
-    for (unsigned int i = 0; i < 100000; i++) {
+    for (unsigned int i = 0; i < 1500; i++) {
         std::vector<unsigned char> char_vector_random = Fill_vector_by_random();
         const std::string hash =
         picosha2::hash256_hex_string(char_vector_random);
         std::lock_guard<std::recursive_mutex> lock(m);
         BOOST_LOG_TRIVIAL(trace)  << "ID thread: "
-        << std::this_thread::get_id() << std::endl;
+        << std::this_thread::get_id();
         std::string prototype = "";
         for (unsigned z = 0; z < char_vector_random.size(); z++) {
         prototype += char_vector_random[z];
