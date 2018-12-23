@@ -11,10 +11,6 @@ set(
   CACHE STRING "Default cache server"
 )
 
-set(
-BOOST_ALL_DYN_LINK OFF
-)
-
 include("tools/gate/cmake/HunterGate.cmake")
 
 huntergate(
@@ -30,6 +26,9 @@ string(APPEND CMAKE_CXX_FLAGS " -Wshadow -Wnon-virtual-dtor")
 hunter_add_package(GTest)
 find_package(GTest CONFIG REQUIRED)
 
+hunter_add_package(Boost)
+find_package(Boost CONFIG REQUIRED)
+
 hunter_add_package(Boost COMPONENTS log thread filesystem system) 
 find_package(Boost CONFIG REQUIRED log thread filesystem system)
 
@@ -38,8 +37,16 @@ add_library(multithreads STATIC
   ${CMAKE_CURRENT_SOURCE_DIR}/sources/main.cpp
 )
 add_executable(tests
+  ${CMAKE_CURRENT_SOURCE_DIR}/tests/test.cpp
+)
+
+add_executable(main
+  ${CMAKE_CURRENT_SOURCE_DIR}/sources/source.cpp
   ${CMAKE_CURRENT_SOURCE_DIR}/sources/main.cpp
 )
+
+
+target_compile_definitions(tests PRIVATE BOOST_LOG_DYN_LINK=true)
 
 target_include_directories(multithreads
   PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include
@@ -50,8 +57,15 @@ target_include_directories(tests
   PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/third-party/PicoSHA2
 )
 
-target_link_libraries(tests PUBLIC GTest::main Boost::log Boost::thread Boost::filesystem Boost::system multithreads)
-target_link_libraries(multithreads PUBLIC Boost::log Boost::thread Boost::filesystem Boost::system)
+target_include_directories(main
+  PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include
+  PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/third-party/PicoSHA2
+)
+
+
+target_link_libraries(tests PUBLIC GTest::main Boost::boost Boost::log Boost::thread Boost::filesystem Boost::system multithreads)
+target_link_libraries(main PUBLIC GTest::main Boost::boost Boost::log Boost::thread Boost::filesystem Boost::system multithreads)
+target_link_libraries(multithreads PUBLIC Boost::boost Boost::log Boost::thread Boost::filesystem Boost::system)
 
 enable_testing()
 add_test(NAME unit_tests COMMAND tests) 

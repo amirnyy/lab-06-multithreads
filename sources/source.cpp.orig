@@ -1,5 +1,7 @@
 // Copyright 2018 Avsyankaa <Avsyankaa@gmail.com>
+
 #include <multithreads.hpp>
+#include <boost/log/sinks/text_file_backend.hpp>
 namespace keywords = boost::log::keywords;
 namespace expr = boost::log::expressions;
 
@@ -8,8 +10,7 @@ std::vector<unsigned char> Multithreads::Fill_vector_by_random() {
     std::vector<unsigned char> char_vector_random;
     unsigned int size = std::rand() % 10 + 4;
     for (unsigned i = 0; i < size; i++) {
-        char_vector_random.push_back(
-        static_cast<unsigned char>(std::rand() % 256));
+        char_vector_random.push_back(static_cast<unsigned char>(std::rand() % 256));
     }
     return char_vector_random;
 }
@@ -30,36 +31,42 @@ void Multithreads::init()
             keywords::file_name = "file_%5N.log",
             keywords::rotation_size = 5 * 1024 * 1024,
             keywords::format = "[%TimeStamp%]: %Message%",
-            keywords::time_based_rotation =
-            sinks::file::rotation_at_time_point(12, 0, 0));
+            keywords::time_based_rotation = sinks::file::rotation_at_time_point(12, 0, 0)
+        );
 
     typedef sinks::synchronous_sink< sinks::text_file_backend > sink_t;
     boost::shared_ptr< sink_t > sink(new sink_t(backend));
-    core->add_sink(sink);
+    sink ->set_filter ( logging::trivial::severity >= logging::trivial::info
+);
 }
 
 void Multithreads::Do_counting() {
     std::srand(std::time(0));
-    for (unsigned int i = 0; i < 100000; i++) {
+    for (unsigned int i = 0; i < 10000; i++) {
         std::vector<unsigned char> char_vector_random = Fill_vector_by_random();
-        const std::string hash =
-        picosha2::hash256_hex_string(char_vector_random);
-        std::lock_guard<std::recursive_mutex> lock(m);
-        BOOST_LOG_TRIVIAL(trace)  << "ID thread: "
-        << std::this_thread::get_id() << std::endl;
-        std::string prototype = "";
-        for (unsigned z = 0; z < char_vector_random.size(); z++) {
-        prototype += char_vector_random[z];
-        }
-        BOOST_LOG_TRIVIAL(trace) << "prototype = " << prototype;
-        BOOST_LOG_TRIVIAL(trace)  << "HASH- function: " << hash;
+        const std::string hash = picosha2::hash256_hex_string(char_vector_random);
+	std::lock_guard<std::recursive_mutex> lock(m);
+        BOOST_LOG_TRIVIAL(trace)  << "ID thread: " << std::this_thread::get_id() << std::endl;
+        BOOST_LOG_TRIVIAL(trace) << "Prototype:  ";
+	std::string prototype;
+      for (unsigned z = 0; z < char_vector_random.size(); z++) {
+	BOOST_LOG_TRIVIAL(trace) << char_vector_random[z];
+}
+        BOOST_LOG_TRIVIAL(trace)  << std::endl;
+        BOOST_LOG_TRIVIAL(trace)  << "HASH- function(trace): " << hash;
+        BOOST_LOG_TRIVIAL(trace) << std::endl << std::endl;
         if (Is_hash_needable(hash)) {
-            BOOST_LOG_TRIVIAL(info) << "ID thread: "
-             << std::this_thread::get_id();
-            BOOST_LOG_TRIVIAL(info) << "prototype = " << prototype;
-            BOOST_LOG_TRIVIAL(info)  << "HASH- function: " << hash;
+	    BOOST_LOG_TRIVIAL(info) << "ID thread: " << std::this_thread::get_id();
+            //BOOST_LOG_TRIVIAL(info)  << "ID thread: " << std::this_thread::get_id();
+            BOOST_LOG_TRIVIAL(info)  << "Prototype: ";
+            for (unsigned z = 0; z < char_vector_random.size(); z++) {
+                BOOST_LOG_TRIVIAL(info) << char_vector_random[z];
+            }
+            BOOST_LOG_TRIVIAL(info)  << "HASH- function(info): " << hash;
+            BOOST_LOG_TRIVIAL(info) << std::endl << std::endl;
         }
     }
+
 }
 
 void Multithreads::Make_counting_in_threads(unsigned threads_count) {
