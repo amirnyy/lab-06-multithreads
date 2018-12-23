@@ -45,19 +45,19 @@ void Multithreads::Do_counting() {
         const std::string hash =
         picosha2::hash256_hex_string(char_vector_random);
         std::lock_guard<std::recursive_mutex> lock(m);
-        BOOST_LOG_TRIVIAL(trace)  << "ID thread: "
+        BOOST_LOG_TRIVIAL(trace) << "[trace]" <<"ID thread: "
         << std::this_thread::get_id();
         std::string prototype = "";
         for (unsigned z = 0; z < char_vector_random.size(); z++) {
         prototype += char_vector_random[z];
         }
-        BOOST_LOG_TRIVIAL(trace) << "prototype = " << prototype;
-        BOOST_LOG_TRIVIAL(trace)  << "HASH- function: " << hash;
+        BOOST_LOG_TRIVIAL(trace) << "[trace]" << "prototype = " << prototype;
+        BOOST_LOG_TRIVIAL(trace) << "[trace]" << "HASH- function: " << hash;
         if (Is_hash_needable(hash)) {
-            BOOST_LOG_TRIVIAL(info) << "ID thread: "
+            BOOST_LOG_TRIVIAL(info) << "[info]" << "ID thread: "
              << std::this_thread::get_id();
-            BOOST_LOG_TRIVIAL(info) << "prototype = " << prototype;
-            BOOST_LOG_TRIVIAL(info)  << "HASH- function: " << hash;
+            BOOST_LOG_TRIVIAL(info) << "[info]" <<"prototype = " << prototype;
+            BOOST_LOG_TRIVIAL(info) << "[info]" <<"HASH- function: " << hash;
         }
     }
 }
