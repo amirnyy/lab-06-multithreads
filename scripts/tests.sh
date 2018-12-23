@@ -7,10 +7,7 @@ export CTEST_OUTPUT_ON_FAILURE=true
 cd _builds
 cd gcc-7-cxx17-pic-Debug
 ./tests
-cd ..
-cd ..
-ls
-cat -n sample.log
+cat -n file_00000.log
 gcovr -r  .
 
 REPORT_DATA=$(gcovr -r  . | base64 | tr -d '\n')
