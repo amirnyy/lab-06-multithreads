@@ -1,5 +1,30 @@
 // Copyright 2018 Avsyankaa <Avsyankaa@gmail.com>
 #include <multithreads.hpp>
+
+#include <boost/core/null_deleter.hpp>
+#include <boost/log/core.hpp>
+#include <boost/log/expressions.hpp>
+#include <boost/log/trivial.hpp>
+#include <boost/log/sinks/sync_frontend.hpp>
+#include <boost/log/sinks/text_file_backend.hpp>
+#include <boost/log/sinks/text_ostream_backend.hpp>
+#include <boost/log/sources/logger.hpp>
+#include <boost/log/sources/record_ostream.hpp>
+#include <boost/smart_ptr/make_shared_object.hpp>
+#include <boost/smart_ptr/shared_ptr.hpp>
+#include <boost/log/utility/setup/file.hpp>
+
+#include <picosha2.h>
+
+#include <iomanip>
+#include <ostream>
+#include <iostream>
+#include <cstdlib>
+
+
+namespace logging = boost::log;
+namespace src = boost::log::sources;
+namespace sinks = boost::log::sinks;
 namespace keywords = boost::log::keywords;
 namespace expr = boost::log::expressions;
 
