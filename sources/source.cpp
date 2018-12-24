@@ -40,7 +40,7 @@ void Multithreads::init()
 
 void Multithreads::Do_counting() {
     std::srand(std::time(0));
-    for (unsigned int i = 0; i < 1500; i++) {
+    for (unsigned int i = 0; i < number_iteration; i++) {
         std::vector<unsigned char> char_vector_random = Fill_vector_by_random();
         const std::string hash =
         picosha2::hash256_hex_string(char_vector_random);
