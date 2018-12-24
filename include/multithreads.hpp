@@ -30,6 +30,7 @@ namespace sinks = boost::log::sinks;
 
 class Multithreads {
 private:
+    const unsigned number_iteration = 1500;
     std::recursive_mutex m;
     std::vector<unsigned char> Fill_vector_by_random();
     bool Is_hash_needable(const std::string& hash);
