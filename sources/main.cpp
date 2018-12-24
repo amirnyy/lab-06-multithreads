@@ -1,5 +1,8 @@
 // Copyright 2018 Avsyankaa <Avsyankaa@gmail.com>
 #include <multithreads.hpp>
+
+#include <cstdlib>
+
 int main(int argc, char* argv[] ) {
     Multithreads m;
     m.init();
