@@ -1,4 +1,4 @@
-// Copyright 2018 Avsyankaa <Avsyankaa@gmail.com>
+// Copyright 2018 amirnyy <alex.mirnyy@gmail.com>
 
 #include <gtest/gtest.h>
 #include <multithreads.hpp>
