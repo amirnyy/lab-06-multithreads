@@ -1,4 +1,4 @@
-// Copyright 2018 Avsyankaa <Avsyankaa@gmail.com>
+// Copyright 2018 amirnyy <alex.mirnyy@gmail.com>
 
 #ifndef INCLUDE_MULTITHREADS_HPP_
 #define INCLUDE_MULTITHREADS_HPP_
